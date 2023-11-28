@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import {SuccessRegisterComponent} from "./success-register/success-register.component";
 import { MessageComponent } from './components/message/message.component';
 import { MajorityDirective } from './directives/majority.directive';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,12 @@ import { MajorityDirective } from './directives/majority.directive';
     MessageComponent,
     MajorityDirective
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      FormsModule,
+      HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
+import {SearchCepService} from "../service/search-cep.service";
 
 @Component({
   selector: 'app-register',
@@ -9,17 +10,26 @@ import {NgForm} from "@angular/forms";
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+      private router: Router,
+      private searchCepService: SearchCepService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  searchCep(ev: any){
+    const cep = ev.target.value;
+    this.searchCepService.getSearchCep(cep)
+        .subscribe((result) =>
+            console.log(result));
+  }
+
   register(form: NgForm){
-    // if (form.valid){
-    //   this.router.navigate(['./success']);
-    // } else {
-    //   alert('Formulário inválido');
-    // }
-    console.log(form.controls);
+    if (form.valid){
+      this.router.navigate(['./success']);
+    } else {
+      alert('Formulário inválido');
+    }
   }
 }

@@ -132,37 +132,123 @@
     <h3 class="main__subtitle">Endereço</h3>
     <div class="form__field">
       <label class="field__label" for="cep">CEP</label>
-      <input name="cep" id="cep" class="field__writing" />
+      <input
+        name="cep"
+        id="cep"
+        class="field__writing"
+        ngModel
+        required
+        #cep="ngModel"
+        pattern="^(\d{5})(-?\d{3})$"
+        minlength="8"
+        maxlength="9"
+        (blur)="searchCep($event)"
+      />
       <div id="erro"></div>
+      <div
+        *ngIf="(cep.invalid && cep.touched) ||
+        cep.dirty"
+      >
+        <app-message
+                *ngIf="cep.errors?.['required']"
+                msg="O campo Cep deve ser preenchido"
+        >
+        </app-message>
+        <app-message
+                *ngIf="cep.errors?.['pattern']"
+                msg="Insira um Cep válido. Ex: 00000-000"
+        >
+        </app-message>
+      </div>
     </div>
 
     <div class="form__field">
       <label class="field__label" for="endereco">Endereço</label>
-      <input name="endereco" id="endereco" class="field__writing" />
+      <input name="endereco" id="endereco" class="field__writing" ngModel required #address="ngModel" minlength="10" />
+      <div
+        *ngIf="(address.invalid && address.touched) ||
+        address.dirty"
+      >
+        <app-message
+                *ngIf="address.errors?.['required']"
+                msg="O campo Endereço deve ser preenchido"
+        >
+        </app-message>
+        <app-message
+                *ngIf="address.errors?.['minlength']"
+                msg="O Endereço deve ter no mínimo 10 caracteres"
+        >
+        </app-message>
+      </div>
     </div>
     <div class="form__double">
       <div class="form__field">
         <label class="field__label" for="numero">Numero</label>
-        <input name="numero" id="numero" class="field__writing" />
+        <input name="numero" id="numero" class="field__writing" ngModel required #number="ngModel" minlength="2"/>
+        <div
+        *ngIf="(number.invalid && number.touched) ||
+        number.dirty"
+        >
+          <app-message
+                  *ngIf="number.errors?.['required']"
+                  msg="O campo Número deve ser preenchido"
+          >
+          </app-message>
+          <app-message
+                  *ngIf="number.errors?.['minlength']"
+                  msg="O campo Número deve conter 2 caracteres ou mais"
+          >
+          </app-message>
+        </div>
       </div>
       <div class="form__field">
         <label class="field__label" for="complemento">Complemento</label>
-        <input name="complemento" id="complemento" class="field__writing" />
+        <input name="complemento" id="complemento" class="field__writing"/>
       </div>
     </div>
     <div class="form__field">
       <label class="field__label" for="bairro">Bairro</label>
-      <input name="bairro" id="bairro" class="field__writing" />
+      <input name="bairro" id="bairro" class="field__writing" ngModel required #district="ngModel" minlength="2"/>
+      <div
+        *ngIf="(district.invalid && district.touched) ||
+        district.dirty"
+      >
+        <app-message
+                *ngIf="district.errors?.['required']"
+                msg="O campo Bairro deve ser preenchido"
+        >
+        </app-message>
+        <app-message
+                *ngIf="district.errors?.['minlength']"
+                msg="O campo Bairro deve conter 2 caracteres ou mais"
+        >
+        </app-message>
+      </div>
     </div>
     <div class="form__double">
       <div class="form__field">
         <label class="field__label" for="cidade">Cidade</label>
-        <input name="cidade" id="cidade" class="field__writing" />
+        <input name="cidade" id="cidade" class="field__writing" ngModel required #city="ngModel" minlength="2"/>
+        <div
+         *ngIf="(city.invalid && city.touched) ||
+         city.dirty"
+        >
+          <app-message
+                  *ngIf="city.errors?.['required']"
+                  msg="O campo Cidade deve ser preenchido"
+          >
+          </app-message>
+          <app-message
+                  *ngIf="city.errors?.['minlength']"
+                  msg="O campo Cidade deve conter 2 caracteres ou mais"
+          >
+          </app-message>
+        </div>
       </div>
 
       <div class="form__field">
         <label class="field__label" for="estado">UF</label>
-        <select id="estado" name="estado" class="field__writing">
+        <select id="estado" name="estado" class="field__writing" ngModel required #state="ngModel">
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>
@@ -192,6 +278,16 @@
           <option value="TO">Tocantins</option>
           <option value="EX">Estrangeiro</option>
         </select>
+        <div
+         *ngIf="(state.invalid && state.touched) ||
+         state.dirty"
+        >
+          <app-message
+                  *ngIf="state.errors?.['required']"
+                  msg="O campo Estado deve ser preenchido"
+          >
+          </app-message>
+        </div>
       </div>
 
     </div>

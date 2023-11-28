@@ -16,7 +16,6 @@ export class MajorityDirective implements Validator{
   constructor() {
   }
   validate(control: AbstractControl): ValidationErrors | null {
-    console.log(control.value);
     const dtBirth = control.value;
     const yearBirth = new Date(dtBirth).getFullYear();
     const currentYear = new Date().getFullYear();

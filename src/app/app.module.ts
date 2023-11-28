@@ -11,6 +11,7 @@ import {SuccessRegisterComponent} from "./success-register/success-register.comp
 import { MessageComponent } from './components/message/message.component';
 import { MajorityDirective } from './directives/majority.directive';
 import {HttpClientModule} from "@angular/common/http";
+import { ValidatingCepDirective } from './directives/validating-cep.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from "@angular/common/http";
     RegisterComponent,
     SuccessRegisterComponent,
     MessageComponent,
-    MajorityDirective
+    MajorityDirective,
+    ValidatingCepDirective
   ],
   imports: [
       BrowserModule,

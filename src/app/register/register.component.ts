@@ -18,11 +18,24 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  searchCep(ev: any){
+  searchCep(ev: any, f: NgForm){
     const cep = ev.target.value;
-    this.searchCepService.getSearchCep(cep)
-        .subscribe((result) =>
-            console.log(result));
+    if (cep !== "") {
+      this.searchCepService.getSearchCep(cep)
+          .subscribe((result) =>{
+            this.complementAddress(result, f);
+          });
+    }
+  }
+
+  complementAddress(data: any, f: NgForm) {
+    f.form.patchValue({
+      address: data.logradouro,
+      complement: data.complemento,
+      district: data.bairro,
+      city: data.localidade,
+      state: data.uf
+    });
   }
 
   register(form: NgForm){

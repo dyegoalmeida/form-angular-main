@@ -142,7 +142,8 @@
         pattern="^(\d{5})(-?\d{3})$"
         minlength="8"
         maxlength="9"
-        (blur)="searchCep($event)"
+        (blur)="searchCep($event, f)"
+        appValidatingCep
       />
       <div id="erro"></div>
       <div
@@ -150,21 +151,26 @@
         cep.dirty"
       >
         <app-message
-                *ngIf="cep.errors?.['required']"
-                msg="O campo Cep deve ser preenchido"
+          *ngIf="cep.errors?.['required']"
+          msg="O campo Cep deve ser preenchido"
         >
         </app-message>
         <app-message
-                *ngIf="cep.errors?.['pattern']"
-                msg="Insira um Cep válido. Ex: 00000-000"
+          *ngIf="cep.errors?.['pattern']"
+          msg="Insira um Cep válido. Ex: 00000-000"
+        >
+        </app-message>
+        <app-message
+          *ngIf="cep.errors?.['appValidatingCep']"
+          msg="O Cep informado não existe"
         >
         </app-message>
       </div>
     </div>
 
     <div class="form__field">
-      <label class="field__label" for="endereco">Endereço</label>
-      <input name="endereco" id="endereco" class="field__writing" ngModel required #address="ngModel" minlength="10" />
+      <label class="field__label" for="address">Endereço</label>
+      <input name="address" id="address" class="field__writing" ngModel required #address="ngModel" minlength="10" />
       <div
         *ngIf="(address.invalid && address.touched) ||
         address.dirty"
@@ -183,8 +189,8 @@
     </div>
     <div class="form__double">
       <div class="form__field">
-        <label class="field__label" for="numero">Numero</label>
-        <input name="numero" id="numero" class="field__writing" ngModel required #number="ngModel" minlength="2"/>
+        <label class="field__label" for="number">Número</label>
+        <input name="number" id="number" class="field__writing" ngModel required #number="ngModel" minlength="2"/>
         <div
         *ngIf="(number.invalid && number.touched) ||
         number.dirty"
@@ -202,13 +208,13 @@
         </div>
       </div>
       <div class="form__field">
-        <label class="field__label" for="complemento">Complemento</label>
-        <input name="complemento" id="complemento" class="field__writing"/>
+        <label class="field__label" for="complement">Complemento</label>
+        <input name="complement" id="complement" class="field__writing" ngModel #complement="ngModel"/>
       </div>
     </div>
     <div class="form__field">
-      <label class="field__label" for="bairro">Bairro</label>
-      <input name="bairro" id="bairro" class="field__writing" ngModel required #district="ngModel" minlength="2"/>
+      <label class="field__label" for="district">Bairro</label>
+      <input name="district" id="district" class="field__writing" ngModel required #district="ngModel" minlength="2"/>
       <div
         *ngIf="(district.invalid && district.touched) ||
         district.dirty"
@@ -227,8 +233,8 @@
     </div>
     <div class="form__double">
       <div class="form__field">
-        <label class="field__label" for="cidade">Cidade</label>
-        <input name="cidade" id="cidade" class="field__writing" ngModel required #city="ngModel" minlength="2"/>
+        <label class="field__label" for="city">Cidade</label>
+        <input name="city" id="city" class="field__writing" ngModel required #city="ngModel" minlength="2"/>
         <div
          *ngIf="(city.invalid && city.touched) ||
          city.dirty"
@@ -247,8 +253,8 @@
       </div>
 
       <div class="form__field">
-        <label class="field__label" for="estado">UF</label>
-        <select id="estado" name="estado" class="field__writing" ngModel required #state="ngModel">
+        <label class="field__label" for="state">UF</label>
+        <select id="state" name="state" class="field__writing" ngModel required #state="ngModel">
           <option value="AC">Acre</option>
           <option value="AL">Alagoas</option>
           <option value="AP">Amapá</option>
